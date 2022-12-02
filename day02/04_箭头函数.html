@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+</style>
+<body>
+    <div id="app">
+        <!--  -->
+        <button id="btn">按钮</button>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        // 补es6箭头函数：弥明函数中用，回调函数中用
+        let fn = (a,b)=>{
+            return a+b;
+        }
+        let fn2 = (a,b) => a+b;
+        new Vue({
+            el:'#app',
+            data:{
+            },
+            
+        });
+        let oBtn = document.querySelector('#btn');
+        console.log(this);// window对象
+        oBtn.onclick = function(){
+            console.log(this);// oBtn对象
+        }
+        oBtn.onclick = ()=>{
+            console.log(this);// window对象
+        }
+        //3 回调函数中使用 test（fn）参数是回调函数
+        // 数组中有高阶函数 arr.filter(fn) arr.map(fn) arr.every(fn)
+        let arr = [
+            {title:'小米',price:3000},
+            {title:'华为',price:3200},
+            {title:'oppo',price:2000}
+        ]
+        // 老方法
+        let res = arr.filter(function(item){
+            return item.price >= 3000;
+        })
+        // 新方法
+        let res2 =arr.filter(item=>{
+            return item.price >= 3000;
+        })
+        console.log(res2);
+
+        function demo(fn) {
+            fn()
+            console.log('tototot');
+            fn()
+        }
+        demo((params)=>{
+            console.log('suanfa');
+        })
+    </script>
+</body>
+</html>

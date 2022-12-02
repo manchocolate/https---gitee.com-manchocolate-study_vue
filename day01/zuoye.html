@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .colours ul.sty{
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            height: 30px;
+            width: 50px;
+            background-color:darkgray;
+            border-radius: 15px;
+            color: pink;
+        }
+        .colours ul.sty2{
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            height: 30px;
+            width: 50px;
+            background-color:darkgray;
+            border-radius: 15px;
+        }
+        
+        .sizes ul.sizeSty{
+            display: inline-block;
+            margin: 5px;
+            padding: 5px;
+            height: 30px;
+            width: 50px;
+            background-color:darkgray;
+            border-radius: 15px;
+            color: pink;
+        }
+        .sizes ul.sizeSty2{
+            display: inline-block;
+            margin: 5px;
+            padding: 5px;
+            height: 30px;
+            width: 50px;
+            background-color:darkgray;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="type">款式选择</div>
+        <hr>
+        <b>你选择的: {{colour}} /  {{size}}</b><br>
+        <div class="colourSite">
+            颜色规定:
+        </div>
+        <div class="colours">
+            <ul v-model="colour" v-for="(item,key) in colours"
+            :key="item.id"
+            :class="{sty:index==key,sty2:index!=key}"
+            @click="colourHandler(key)">{{item.colour}}</ul>
+        </div>
+        <div class="sizeSite">
+            大小规定:
+        </div>
+        <div class="sizes">
+            <ul v-model="colour" v-for="(item,key) in sizes"
+            :key="item.id"
+            :class="{sizeSty:sizeIndex==key,sizeSty2:sizeIndex!=key}"
+            @click="sizeHandler(key)">{{item.size}}</ul>
+        </div>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        // 引入vue库
+        // let a = 'hello';
+        // document.querySelector("#app").innerHTML = a;
+        new Vue({
+            el:'#app',
+            data:{
+                index:0,
+                sizeIndex:0,
+                colour:'红色',
+                size:'M',
+                colours:[
+                    {id:1,colour:'红色'},
+                    {id:2,colour:'蓝色'},
+                    {id:3,colour:'紫色'},
+                ],
+                sizes:[
+                    {id:1,size:'M'},
+                    {id:2,size:'L'},
+                    {id:3,size:'XL'},
+                ]
+            },
+            methods:{
+                colourHandler(num){
+                    this.index=num;
+                    this.colour=this.colours[num].colour;
+                },
+                sizeHandler(num){
+                    this.sizeIndex=num;
+                    this.size=this.sizes[num].size;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .red{
+        color: #f00;
+    }
+    .blue{
+        color: #00f;
+    }
+    .green{
+        color: #0ff;
+    }
+</style>
+<body>
+    <div id="app">
+            <son-cmp></son-cmp>
+            <son-cmp :fa="fa"></son-cmp>
+            <son-cmp fa="green"></son-cmp>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        // 1生成子组件
+        let sonCmp = {
+            methods: {
+                up(){
+                    this.str+='111';
+                }
+            },
+            props:{ // 父向子传值的变量 与data中定义使用一样 props
+                fa:{
+                    type:String,
+                    default:"red",
+                }
+            },
+            template:'<div :class="fa">局部子组件+++{{str}}</div>',
+            
+        };
+        new Vue({
+            el:'#app',
+            data:{
+                fa:"blue", // 父组件定义的变量
+            },
+            components:{
+                sonCmp,
+
+            }
+        });
+        
+    </script>
+</body>
+</html>

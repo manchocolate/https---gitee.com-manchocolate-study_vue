@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+</style>
+<body>
+    <div id="app">
+        <!-- 
+            全局定义指令（重要）
+            局部定义指令
+         -->
+         <div v-colour="mycolour">haha</div>
+        <!-- 自动获取焦点 focus（） -->
+         <input type="text" v-focus2>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        // 引入vue库
+        // let a = 'hello';
+        // document.querySelector("#app").innerHTML = a;
+        Vue.directive("colour",{
+            inserted(el,bindding){
+                el.style.color = bindding.value;
+            }
+        })
+        Vue.directive("focus",{
+            inserted(el){
+                el.focus();
+            }
+        })
+        new Vue({
+            el:'#app',
+            data:{
+                mycolour:"#f00",
+            },
+            directives:{ // 局部指令
+                focus2:{
+                    inserted(el){
+                        el.focus();
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

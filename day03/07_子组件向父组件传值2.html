@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .red{
+        color: #f00;
+    }
+    .blue{
+        color: #00f;
+    }
+    .green{
+        color: #0ff;
+    }
+</style>
+<body>
+    <div id="app">
+            <son-cmp ref="so"></son-cmp>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        // zi组件向父组件传值 $refs,$children
+        let sonCmp = {
+            data(){
+                return{
+                    msg:"haha"
+                }
+            },
+            methods:{
+                runHandler(){
+                    console.log("子组件");
+                }
+            },
+            template:'<div>局部子组件+++</div>',
+            
+        };
+        new Vue({
+            el:'#app',
+            data:{
+                 // 父组件定义的变量
+            },
+            components:{
+                sonCmp
+            },
+            mounted() {
+                //访问子组件的方法
+                console.log(this)
+                console.log(this.$refs.so.msg);
+                this.$refs.so.runHandler();
+                this.$children.forEach(item=>{
+                    console.log(item),
+                    console.log(item._uid)
+                    console.log(item.msg)
+                    console.log(item.runHandler)
+                })
+            },
+            methods: {
+            },
+        });
+        
+    </script>
+</body>
+</html>

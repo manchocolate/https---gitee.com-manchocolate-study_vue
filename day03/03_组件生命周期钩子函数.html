@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+</style>
+<body>
+    <div id="app">
+        <!-- 3单独的子组件界面 -->
+        <button @click="flag=!flag">床架销毁</button>
+        <keep-alive>
+            <son-cmp v-if="flag"></son-cmp>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        // 1生成子组件
+        let sonCmp = {
+            data(){
+                return{
+                    str:'asasdas',
+                }
+            },
+            methods: {
+                up(){
+                    this.str+='111';
+                }
+            },
+            template:'<div @click="up">dsaf+++{{str}}</div>',
+            // 生命周期钩子函数 ： 创建。。销毁过程  某个时间点执行的函数
+            /* 
+                父子间创建之前beforeCreate-父组件创建之后create-父组件的dom加载之前beforeMount
+                - 子组件创建之前beforeCreate-子组件创建之后create-子组件的dom加载之前beforeMount
+                - 子组件的dom加载之后mounted-父组件dom加载之后mounted
+                beforeUpdate updated;
+                beforeDestory destoryed;
+            */
+            beforeCreate() {
+                console.log('组件创建之前'+this.str);
+            },
+            created() {
+                console.log('组件创建之后,数据的初始内存执行'+this.str)
+            },
+            beforeMount() {
+                console.log('dom加载之前'+document.querySelector("#app").innerHTML);
+            },
+            mounted() {
+                console.log('dom加载之后'+document.querySelector("#app").innerHTML);
+            },
+            beforeUpdate() {
+                console.log('更新之前'+document.querySelector("#app").innerHTML);
+            },
+            updated() {
+                console.log('更新之后'+document.querySelector("#app").innerHTML);
+            },
+            beforeDestroy() {
+                console.log("销毁前")
+            },
+            destroyed() {
+                console.log("销毁后")
+            },
+            activated() {
+                console.log("组件开启")
+            },
+            deactivated() {
+                console.log("组件停用")
+            },
+        };
+        new Vue({
+            el:'#app',
+            data:{
+                flag:true,
+            },
+            components:{
+                sonCmp, //2瓜子组件
+
+            }
+        });
+        
+    </script>
+</body>
+</html>

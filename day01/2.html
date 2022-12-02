@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bg{
+            background-color: #0ff;
+        }
+        .bigsize{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <p v-text="kk"></p>
+        <p v-html="kk"></p>
+    </div>
+    <div id="app2">
+        <div title="哈哈">哈哈</div>
+        <a v-bind:title="str">你好</a>
+        <a :title="str2">不好</a>
+        <div :class="{bg:1==1,bigsize:active}" @click="run">sss</div>
+        <!-- staly -->
+        <div :style="[e]">ddd</div>
+    </div>
+    <div class="bg bigsize">dasd</div>
+    <!-- 对象格式 -->
+    <div :class="{bg:1==1,bigsize:active}"></div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'haaa',
+                kk:'<b>happ</b>'
+            }
+        })
+        new Vue({
+            el:'#app2',
+            data:{
+                str:"你好",
+                str2:'不好',
+                active:true,
+                e:{
+                    color: 'red',
+                    fontSize: '13px'
+                },
+            },
+            methods:{
+                run(){
+                    this.active = !this.active;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

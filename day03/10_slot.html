@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box{
+        display: flex;
+    }
+    .box div{
+        flex: 1;
+    }
+    .box .left{
+        background-color: bisque;
+    }
+    .box .center{
+        background-color: darkblue;
+    }
+    .box .right{
+        background-color: pink;
+    }
+</style>
+<body>
+    <div id="app">
+            <!-- 插槽slot:占位替换内容 -->
+            <son-cmp>
+                <p slot="s1">左</p>
+                <p slot="s2">中</p>
+                <p slot="s3">右</p>
+            </son-cmp>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        let sonCmp = {
+            template:`
+                <div class="box">
+                    <div class="left"><slot name="s1">zuo</slot></div>
+                    <div class="center"><slot name="s2">zhong</slot></div>
+                    <div class="right"><slot name="s3">you</slot></div>
+                </div>
+            ` //反引号实现模板字符串
+        }
+        new Vue({
+            el:'#app',
+            components:{
+                sonCmp,
+            }
+        });
+        
+    </script>
+</body>
+</html>

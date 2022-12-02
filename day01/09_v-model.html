@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-model双向数据绑定 -->
+        <input type="text" v-model="uname">{{uname}}
+        <!-- v-model是语法糖 :value @input 等同 v-model -->
+        <hr>
+        <input type="text" :value="uname" @input="runHandler">
+        <!-- 复选框 -->
+        <input type="checkbox" v-model="tags" value="爬山">爬山
+        <input type="checkbox" v-model="tags" value="看书">看书
+        <input type="checkbox" v-model="tags" value="逛街">逛街
+        <input type="checkbox" v-model="tags" >全选
+        {{tags}}
+        <!-- 单选框 -->
+        <hr>
+        <input type="radio" v-model="sex" value="0">nan
+        <input type="radio" v-model="sex" value="1">nv
+        {{sex}}
+        <hr>
+        <!-- 下拉框 -->
+        <select v-model="city">
+            <option value="北京">北京</option>
+            <option value="天津">天津</option>
+            <option value="伤害">伤害</option>
+        </select>
+        {{city}}
+        <!-- 复选框实现全选和不选 -->
+        <hr>
+        <input type="checkbox" v-model="flag">全选/不选
+        {{flag}}
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        let mv = new Vue({
+            el:'#app',
+            data:{
+                uname:'tom',
+                tags:['看书'],
+                sex:0,
+                flag:false,
+                city:'天津'
+            },
+            methods:{
+                runHandler(e){
+                    this.uname = e.target.value;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

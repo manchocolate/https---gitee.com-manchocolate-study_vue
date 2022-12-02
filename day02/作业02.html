@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+</style>
+<body>
+    <div id="app">
+        <div>
+            <label>
+                编号:<input type="text" v-model="id">
+            </label>
+            <label>
+                名称:<input type="text" v-model="name">
+            </label>
+            <button @click="insert">添加</button>
+            <label>
+                搜索:<input type="text" v-model="keywords"/>
+            </label>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="(item,key) in search()" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td><button @click.prevent="del(item.id)">删除</button> </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                id:'',
+                name:'',
+                keywords:'',
+                list:[
+                    {id:1,name:'奔驰'},
+                    {id:2,name:'大众'},
+                    {id:3,name:'宝马'}
+                ]
+            },
+            methods:{
+                insert(){
+                    let one = {id:this.id,name:this.name};
+                    this.list.push(one);
+                    this.id=this.name='';
+                },
+                del(id){
+                    let index = this.list.findIndex(item=>{
+                        if(item.id==id){
+                            return true;
+                        }
+                    });
+                    let delCon = this.list.splice(index,1);
+                    console.log(delCon[0].id);
+                    alert('删除的为'+delCon[0].name);
+                },
+                search(){
+                    let res = this.list.filter(item=>{
+                        if(item.name.includes(this.keywords)){
+                            return item;
+                        }
+                    })
+                    return res;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

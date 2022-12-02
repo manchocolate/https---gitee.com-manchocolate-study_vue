@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box{
+        display: flex;
+    }
+    .box div{
+        flex: 1;
+    }
+    .box .left{
+        background-color: bisque;
+    }
+    .box .center{
+        background-color: darkblue;
+    }
+    .box .right{
+        background-color: pink;
+    }
+</style>
+<body>
+    
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        // 1模板字符串 实现大段代码、解析变量
+        let str = 'res';
+        let result = `
+            ${str}
+        `
+        console.log(result);
+
+        // 2解构赋值
+        let arr = ['one','two'];
+        let [x,y]=arr;
+        console.log(x,y);
+        // 对象结构赋值常用
+        let obj = {key1:'red',key2:'ff',key3:'33'};
+        let {key1,key2}=obj;
+        console.log(key1,key2)
+    
+        // 3扩展运算字符
+        // 1)数组合并
+        let arr1 = [1,2];
+        let arr2 = [3,4];
+        console.log(...arr1,...arr2);
+        // 2)数组复制(浅拷贝)
+        let arr3 = ['a','b'];
+        let arr4 = arr3; //同一个数组
+        let arr5 = [...arr3];
+        arr5[0] = 'k';
+        console.log(arr3);
+        // 3)函数使用
+        function fn(x,...y){
+            console.log(x,y);
+        }
+        fn(12,3,21,3,21,312,3,12,3,12,3,21,3,12,3,213);
+    </script>
+</body>
+</html>

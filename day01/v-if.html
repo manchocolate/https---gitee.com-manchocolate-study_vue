@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-if="msg=='ok'">danfenzhi</div>
+        {{Math.random()}}
+        <div v-if="Math.random()>0.5">大于0.5</div>
+        <div v-else>小于0.5</div>
+        <div v-if="type === 'A'">
+            A
+          </div>
+          <div v-else-if="type === 'B'">
+            B
+          </div>
+          <div v-else-if="type === 'C'">
+            C
+          </div>
+          <div v-else>
+            Not A/B/C
+          </div>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'ddd',
+                type:'a'
+            }
+        })
+    </script>
+</body>
+</html>

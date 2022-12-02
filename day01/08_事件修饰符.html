@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-on 简写@ -->
+        <!-- 事件修饰符<@click.prevent>  .prevent取消默认行为 .stop组织冒泡  .once只触发一次 .self触发自己的dom，儿子触发不了-->
+        <a href="www.baidu.com" @click.prevent="run">跳转</a>
+        <div @click="par">
+            par
+            <div @click.stop="son">son</div>
+        </div>
+        <div @click.self="par">
+            par
+            <div @click="son">son</div>
+        </div>
+        <div @click.once="par">
+            par
+            <div @click="son">son</div>
+        </div>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        let mv = new Vue({
+            el:'#app',
+            data:{
+                msg:'hello',
+                count:1,
+            },
+            methods:{
+                run(){
+                    alert(1231434234)
+                },
+                par(){
+                    alert('par')
+                },
+                son(){
+                    alert('son')
+                },
+            }
+        })
+    </script>
+</body>
+</html>

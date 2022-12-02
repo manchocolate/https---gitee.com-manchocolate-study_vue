@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .titles li.active{
+            color: purple;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        #app{
+            width: 100%;
+            height: 100%;
+            flex-direction: row;
+        }
+        .tabs{
+            width: 100%;
+            height: 100%;
+            flex-direction: row;
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="tabs">
+            <!-- 标题 -->
+            <ul class="titles">
+                <li v-for="(item,key) in titles " 
+                :key="item.id" 
+                :class="{active:key==index}"
+                @click="toggleHandler(key)">
+                {{item.title}}======{{key}}</li>
+            </ul>
+            <!-- 内容 -->
+            <div class="con">
+                {{cont}}
+            </div>
+        </div>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        let mv = new Vue({
+            el:'#app',
+            data:{
+                cont:'小米内容',
+                index:0,
+                titles:[
+                    {id:1,title:"小米"},
+                    {id:2,title:"华为"},
+                    {id:3,title:"oppo"}
+                ],
+                // contents通过标题id获得一个对应的内容
+                contents:[
+                    {id:1,continue:"小米内容"},
+                    {id:2,continue:"华为内容"},
+                    {id:3,continue:"oppo内容"},
+                ]
+            },
+            methods:{
+                toggleHandler(num){
+                    // 修改对应内容
+                    this.index=num;
+                    this.cont = this.contents[this.index].continue;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

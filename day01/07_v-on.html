@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-on 简写@ -->
+        {{msg}}
+        <button @click="clickkk">点击技术</button>
+        <div>{{count}}</div>
+        <button @click="runHandler">触发方法</button>
+        <button @click="playHandler('ok')">触发方法传值</button>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        let mv = new Vue({
+            el:'#app',
+            data:{
+                msg:'hello',
+                count:1,
+            },
+            methods:{
+                clickkk(){
+                    this.count=++this.count;
+                },
+                runHandler(event){
+                    console.log(this.msg);
+                    console.log(event.target);
+                    console.log(event.target.tagName);
+                },
+                playHandler(x){
+                    this.msg+=x;
+                }
+            }
+        })
+        // console.log(mv)
+        // console.log(mv.$el)
+        // mv.$el.innerHTML = 'haha'
+    </script>
+</body>
+</html>

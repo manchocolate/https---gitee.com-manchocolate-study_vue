@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .red{
+        color: #f00;
+    }
+    .blue{
+        color: #00f;
+    }
+    .green{
+        color: #0ff;
+    }
+</style>
+<body>
+    <div id="app">
+            <son-cmp1></son-cmp1>
+            <son-cmp2></son-cmp2>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        // 子组件之间的传值；公共总线 bug.$emit()发布  bus.$on()订阅
+        // 组件1向组件2传值
+        let bus = new Vue();
+        let sonCmp1 = {
+            data(){
+                return{
+                    msg:'happu'
+                }
+            },
+            methods: {
+                runHandler(){
+                    let jj='jj';
+                    bus.$emit("eventsend",jj,this.msg);
+                }
+            },
+            template:'<div @click="runHandler">局部子组件1{{msg}}</div>',
+            
+        };
+        let sonCmp2 = {
+            data() {
+                return {
+                    son2:'goods',
+                }
+            },
+            mounted() {
+                bus.$on("eventsend",(x,y)=>{
+                    this.son2+=x;
+                    this.son2+=y;
+                })
+            },
+            template:'<div>局部子组件2{{son2}}</div>',
+            
+        };
+        new Vue({
+            el:'#app',
+            components:{
+                sonCmp1,
+                sonCmp2,
+
+            }
+        });
+        
+    </script>
+</body>
+</html>
