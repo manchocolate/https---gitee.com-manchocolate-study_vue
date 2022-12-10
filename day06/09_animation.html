@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box{
+        width: 80px;
+        height: 80px;
+        background-color: #f00;
+    }
+    /* 
+        name="fade" fade-enter ,默认v-enter
+        进入 （透明-》显示）
+        v-enter进入的开始 
+        v-enter-to进入的结束
+        v-enter-active进入动画的过程
+        离开（显示-》透明）
+        v-leave 离开的开始
+        v-leave-to 离开的结束
+        v-leave-active 离开动画的过程
+    */
+    /* 隐藏 */
+    /* .fade-leave{
+        opacity: 1;
+
+    }
+    .fade-leave-to{
+        opacity: 0;
+        width: 150px;
+    }
+    .fade-leave-active{
+        transition:all 2s;
+    }
+    .fade-enter{
+        opacity: 0;
+
+    }
+    .fade-enter-to{
+        height: 150px;
+        opacity: 1;
+    }
+    .fade-enter-active{
+        transition:all 2s;
+    } */
+    /* .fade-leave-to,.fade-enter{
+        opacity: 0;
+        width: 150px;
+    }
+    .fade-leave-active,.fade-enter-active{
+        transition:all 2s;
+    } */
+    /* animation动画 */
+    .fade-leave-active{
+        animation: fade-leave 2s;
+    }
+    .fade-enter-active{
+        animation: fade-leave 2s reverse;
+    }
+    @keyframes fade-leave {
+        0%{
+            opacity: 1;
+            width: 200px;
+        }
+        100%{
+            opacity: 0;
+            width: 250px;
+        }
+    }
+</style>
+<body>
+    <div id="app">
+        <!-- 
+            css 过渡动画（transtion），动画（animation）
+        -->
+        <button @click="flag=!flag">显示隐藏</button>
+        <transition name="fade">
+            <div class="box" v-show="flag">
+
+            </div>
+        </transition>
+    </div>
+
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            str:"9888",
+            flag:true,
+        },
+    })
+</script>
+</body>
+</html>

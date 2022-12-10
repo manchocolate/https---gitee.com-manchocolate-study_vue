@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 实现超链接 -->
+        <!-- router-link 子组件 :对应超链接a，router-view 子组件：对应div -->
+        <div><router-view></router-view>
+        <router-link to="/home">home</router-link>
+        <router-link to="/cates">cates</router-link>
+        <router-link to="/cart">cart</router-link>
+        <router-link to="/my">my</router-link>
+        <router-view></router-view>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.0/dist/vue-router.js"></script>
+    <!-- vue-router -->
+    <script>
+        let home ={
+            template:`<div>shouye</div>`
+        }
+        let cates = {
+            template:"<div>fenlei</div>"
+        }
+        let cart = {
+            template:"<div>gouwuche</div>"
+        } 
+        let my = {
+            template:"<div>wode</div>"
+        }
+        let router = new VueRouter({
+            routes:[
+                {path:"/",redirect:"/home"},
+                {path:"/home",component:home},
+                {path:"/cates",component:cates},
+                {path:"/cart",component:cart},
+                {path:"/my",component:my},
+                {path:"/my",component:my},
+            ]
+        })
+        new Vue({
+            el:'#app',
+            // 5挂路由
+            router,
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        前端路由：单页面加载 通过路由切换加载不同频道组件更新页面只需要一个主页面
+        后端你路由：多页面应用
+     -->
+    <!-- hash模式（默认）  #开头 -->
+    <!-- history模式： 传统写法 /login ： history.pushState实现 -->
+    <a href="#/login">denglu</a>
+    <a href="#/reg">zhuce</a>
+    <div id="box">对应路由加载内容</div>
+    <script>
+        window.onhashchange = function(){
+            if(location.hash=='#/login'){
+                // denglu jiazai
+                document.querySelector('#box').innerHTML = '子组件登录内容';
+            }else{
+                // zhuce jiazai
+                document.querySelector('#box').innerHTML = '子组件注册内容';
+            }
+        }
+    </script>
+</body>
+</html>

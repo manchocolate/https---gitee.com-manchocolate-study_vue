@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <!-- 
+            路由传值 : 
+            query对象 ?user=tom&age=18 键值传递（无顺序）
+            params对象传值（动态）tom/18 值传递
+        -->
+        <div id="app">
+            <!-- 字符串型 -->
+            <router-link to="/login?user=tome&age=18">denglu</router-link>
+            <router-link :to="'/login?user='+user+'&age='+age">denglu</router-link>
+            <!-- 对象型 -->
+            <router-link :to="{path:'/login?user='+user+'&age='+age}">denglu</router-link>
+            <router-link :to="{name:'Login',query:{user:user,age:age}}">denglu</router-link>
+            <!-- params传值 -->
+            <router-link :to="'/reg/'+user+'/'+age">zhuce</router-link>
+            <!-- 对象写法 -->
+            <router-link :to="{name:'Reg',query:{user:user,age:age}}">zhuce2</router-link>
+            <router-view></router-view>
+        </div>
+        <template></template>
+        <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router@3.0.0/dist/vue-router.js"></script>
+        <script>
+            // 2定义子组件
+            let login = {
+                mounted() {
+                    // this.$route获取传值
+                    console.log(this.$route);
+                    console.log(this.$route.query);
+                    console.log(this.$route.query.user);
+                },
+                template:` <div>denglu</div>`
+            }
+            let reg = {
+                mounted(){
+                    // this.$route获取传值
+                    console.log(this.$route);
+                    console.log(this.$route.params);
+                    console.log(this.$route.params.user);
+                },
+                template:" <div>zhuce</div>"
+            }
+            // 3实例化vue-router
+            let router = new VueRouter({
+                // 4配置路由匹配
+                routes: [
+                    {path:"/login",name:"Login",component:login},
+                    {path:"/reg/:user/:age",name:"Reg",component:reg}, // params
+                ]
+            })
+        new Vue({
+            data:{
+                user:"alice",
+                age:18,
+            },
+            el:'#app',
+            // 5挂路由
+            router,
+        })
+    </script>
+</body>
+</html>

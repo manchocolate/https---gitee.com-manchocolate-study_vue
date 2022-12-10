@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+</style>
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+    <template id="text">
+        <div class="wrap">
+            <div class="header">头部</div>
+            <div class="main">
+                <div class="menu">彩蛋</div>
+                <div class="router">路由</div>
+            </div>
+        </div>
+    </template>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.0/dist/vue-router.js"></script>
+    <script>
+        // 2定义子组件
+        let home = {
+            template:"#text"
+        }
+        // 2定义子组件
+        let cates = {
+            template:"<div>分类管理</div>"
+        }
+        // 2定义子组件
+        let goods = {
+            template:"<div>商品管理</div>"
+        }
+        // 3实例化vue-router
+        let router = new VueRouter({
+            // 4配置路由匹配
+            routes: [
+                {
+                    path:"/",
+                    component:home,
+                    redirect:"/cates",
+                    children:[
+                        {path:"/cates",component:cates},
+                        {path:"/goods",component:goods},
+                    ]
+                },
+            ]
+        })
+        new Vue({
+            el:'#app',
+            router // 5挂路由
+        });
+        
+    </script>
+</body>
+</html>

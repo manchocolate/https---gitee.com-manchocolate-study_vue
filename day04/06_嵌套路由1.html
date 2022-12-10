@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+</style>
+<body>
+    <div id="app">
+        <router-link to="/page1">1</router-link>
+        <router-link to="/page2">2</router-link>
+        <router-view></router-view>
+    </div>
+    <template id="text">
+        <div>
+            页面一内容
+        <router-link to="/page1/guonei">guonei</router-link>
+        <router-link to="/page2/guowai">guowai</router-link>
+        <router-view></router-view>
+        </div>
+    </template>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.0/dist/vue-router.js"></script>
+    <script>
+        // 2定义子组件
+        let page1 = {
+            template:"#text"
+        }
+        let page2 = {
+            template:" <div>2</div>"
+        }
+        let guonei = {
+            template:" <div>guonei</div>"
+        }
+        let guowai = {
+            template:" <div>guowai</div>"
+        }
+        // 3实例化vue-router
+        let router = new VueRouter({
+            // 4配置路由匹配
+            routes: [
+                {path:"/",redirect:"/page1"},
+                {
+                    path:"/page1",
+                    component:page1,
+                    children:[
+                        {path:"/page1/guonei",component:guonei},
+                        {path:"/page2/guowai",component:guowai},
+                    ]
+                },
+                {path:"/page2",component:page2},
+            ]
+        })
+        new Vue({
+            el:'#app',
+            router // 5挂路由
+        });
+        
+    </script>
+</body>
+</html>
