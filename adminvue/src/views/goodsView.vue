@@ -48,23 +48,27 @@
       @current-change="changePage"
       />
     </div>
-    <el-dialog v-model="showModal" title="商品管理" width="30%" :before-close="handleClose">
+    <el-dialog v-model="showModal" title="商品管理" width="30%" :before-close="handleClose" @opened="show()"
+      @closed="hidden()">
       <div>
         <el-form :model="goodsForm" label-width="120px" :rules="rules" ref="ruleFormRef">
-          <el-form-item label="商品名称">
+          <el-form-item label="商品名称" prop="title">
             <el-input v-model="goodsForm.title" placeholder="请输入商品的名称" clearable maxlength="30"/>
           </el-form-item>
-          <el-form-item label="商品描述">
+          <el-form-item label="商品描述" prop="title2">
             <el-input v-model="goodsForm.title2" placeholder="请输入商品的名称" clearable maxlength="30"/>
           </el-form-item>
-          <el-form-item label="市场价格">
+          <el-form-item label="市场价格" prop="market_price">
             <el-input v-model="goodsForm.market_price" placeholder="请输入商品的名称" clearable maxlength="30"/>
           </el-form-item>
-          <el-form-item label="打折价格">
+          <el-form-item label="打折价格" prop="price">
             <el-input v-model="goodsForm.price" placeholder="请输入商品的名称" clearable maxlength="30"/>
           </el-form-item>
-          <el-form-item label="库存">
+          <el-form-item label="库存" prop="stock" >
             <el-input v-model="goodsForm.stock" placeholder="请输入商品的名称" clearable maxlength="30"/>
+          </el-form-item>
+          <el-form-item label="详细内容">
+            <div ref="editor" style="overflow:hidden"></div>
           </el-form-item>
           <el-form-item label="是否是热卖">
             <el-switch v-model="goodsForm.is_hot" :active-value="1" :inactive-value="0" />
@@ -85,6 +89,7 @@
 </template>
 
 <script>
+import WangEditor from "wangeditor";
 export default {
   data() {
     return {
@@ -232,8 +237,10 @@ export default {
       this.action="add";
     },
     async handleSumbit(){
-      await this.$refs.ruleFormRef.validate(async valid=>{
+      this.$refs.ruleFormRef.validate(async (valid)=>{
+        //alert("添加成功")
         if(valid){
+          this.goodsForm.content = this.instance.txt.html();
           // 验证成功，添加修改接口调用
           let {action,goodsForm} = this;
           let params = {
@@ -256,18 +263,35 @@ export default {
             this.goodsList[index] =params;
           }
         }
-        this.showModal = false;
+        this.handleReset();
+        this.$nextTick(()=>{
+          this.showModal = false;
+        })
         this.$message.success("操作成功")
       })
     },
     //充值方法
     handleReset(){
-      this.$refs.ruleFormRef.resetFields();
+      this.$refs.ruleFormRef.resetFields();// 异步
       this.goodsForm='';
     },
     handleClose(){
-      this.showModal = false;
-      this.handleReset();
+      this.handleReset();//先执行
+      this.$nextTick(()=>{
+        this.showModal = false;
+      })
+    },
+    show(){
+      this.instance = new WangEditor(this.$refs.editor);
+      this.instance.create();
+      // 修改获得初始值
+      if(this.goodsForm.content){
+        this.instance.txt.html(this.goodsForm.content);
+      }
+    },
+    hidden(){
+      this.instance.destroy();
+      this.instance = null;
     },
   },
 };

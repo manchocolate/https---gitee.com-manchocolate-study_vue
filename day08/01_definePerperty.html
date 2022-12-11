@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input">
+        <span id="span"></span>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        /*
+            vue2:defineProperty 响应数据,vue3:proxy 监听整个对象（get，set拦截）
+            双向数据绑定实现
+        */
+       let inputObj = document.getElementById("input");
+       let spanObj = document.getElementById("span");
+        const obj = {}
+        Object.defineProperty(obj,'text',{
+            get(){
+                console.log("自动执行getter");
+            },
+            set(newVal){
+                console.log("自动执行setter");
+                //修改视图
+                inputObj.value=newVal;
+                spanObj.innerHTML = newVal;
+            }
+        });
+        input.addEventListener("keyup",function(e){
+            obj.text = e.target.value;
+            obj.a = "haha";//监听不到
+        });
+    </script>
+</body>
+</html>
